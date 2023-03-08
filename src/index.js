@@ -5,12 +5,14 @@ import Notiflix from 'notiflix';
 
 const DEBOUNCE_DELAY = 300;
 const refs = {
-    inputRef: document.querySelector('#search-box'),
-    listRef: document.querySelector('.country-list'),
-    infoRef: document.querySelector('.country-info'),
+    input: document.querySelector('#search-box'),
+    list: document.querySelector('.country-list'),
+    info: document.querySelector('.country-info'),
   };
+
+  refs.input.setAttribute('placeholder',"Enter country name")
   
-  refs.inputRef.addEventListener(
+  refs.input.addEventListener(
     'input',
     debounce(onInputSearchCountry, DEBOUNCE_DELAY)
   );
@@ -20,8 +22,8 @@ const refs = {
     const valueNormalized = inputText.trim().toLowerCase();
   
     if (valueNormalized === '') {
-      refs.listRef.innerHTML = '';
-      refs.infoRef.innerHTML = '';
+      refs.list.innerHTML = '';
+      refs.info.innerHTML = '';
       return;
     } else {
       fetchCountries(valueNormalized)
@@ -31,29 +33,29 @@ const refs = {
           );
   
           if (findCountry.length > 10) {
-            refs.listRef.innerHTML = '';
-            refs.infoRef.innerHTML = '';
+            refs.list.innerHTML = '';
+            refs.info.innerHTML = '';
             Notiflix.Notify.info(
               'Too many matches found. Please enter a more specific name.'
             );
           }
           if (findCountry.length > 1 && findCountry.length <= 10) {
             const markupList = createCountriesList(findCountry);
-            refs.listRef.innerHTML = markupList;
-            refs.infoRef.innerHTML = '';
+            refs.list.innerHTML = markupList;
+            refs.info.innerHTML = '';
             return;
           }
   
           if (findCountry.length === 1) {
             const markupOneCountry = createCountryInformation(findCountry[0]);
-            refs.infoRef.innerHTML = markupOneCountry;
-            refs.listRef.innerHTML = '';
+            refs.info.innerHTML = markupOneCountry;
+            refs.list.innerHTML = '';
             return;
           }
   
           if (findCountry.length === 0) {
-            refs.listRef.innerHTML = '';
-            refs.infoRef.innerHTML = '';
+            refs.list.innerHTML = '';
+            refs.info.innerHTML = '';
           }
         })
         .catch(error => {
