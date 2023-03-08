@@ -28,8 +28,9 @@ const refs = {
     } else {
       fetchCountries(valueNormalized)
         .then(countries => {
+    
           const findCountry = countries.filter(({ name }) =>
-            name.official.toLowerCase().includes(valueNormalized)
+            name.common.toLowerCase().includes(valueNormalized)
           );
   
           if (findCountry.length > 10) {
@@ -67,10 +68,11 @@ const refs = {
   function createCountriesList(countries) {
     return countries
       .map(
-        ({ name , flags }) => `
+        ({ flags: { svg },
+            name: {common} , }) => `
         <li class="list__item">
-                <img src="${flags.svg}" alt="${name.official}" width="30" height="30"/>
-                <h4>${name.official}</h4>
+                <img src="${svg}" alt="${common}" width="30" height="30"/>
+                <h4>${common}</h4>
             </li>
         `
       )
@@ -79,7 +81,7 @@ const refs = {
   
   function createCountryInformation({
     flags: { svg },
-    name: {official} ,
+    name: {common} ,
     capital,
     population,
     languages,
@@ -88,8 +90,8 @@ const refs = {
     return `
     <div class="info__item">
             <div class="block-img">
-              <img src="${svg}" alt="${official}" width="50"/>
-              <h2>${official}</h2>
+              <img src="${svg}" alt="${common}" width="50"/>
+              <h2>${common}</h2>
            </div>
                      <p><b>Capital:</b> ${capital}</p>
                      <p><b>Population:</b> ${population}</p>

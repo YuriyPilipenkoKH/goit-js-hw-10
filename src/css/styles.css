@@ -25,6 +25,7 @@ body {
   margin-bottom: 16px;
   border-radius: 6px;
   border: 1px solid #757575;
+  outline: 5px solid transparent;
 }
 
 #search-box:focus {
