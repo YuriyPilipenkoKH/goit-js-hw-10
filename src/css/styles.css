@@ -17,6 +17,7 @@ body {
   /*  */
 }
 
+
 #search-box {
   font: inherit;
   padding: 8px;
@@ -34,4 +35,11 @@ body {
 
 .country-list {
   list-style: none;
+}
+
+.block-img,
+.list__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
