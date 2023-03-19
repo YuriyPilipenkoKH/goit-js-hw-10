@@ -2,6 +2,8 @@ import './css/styles.css';
 import {fetchCountries} from './fetchCountries'
 import debounce from 'lodash.debounce';
 import Notiflix from 'notiflix';
+import { BASE_URL } from './fetchCountries';
+
 
 const DEBOUNCE_DELAY = 300;
 const refs = {
@@ -31,7 +33,9 @@ const refs = {
     
           const findCountry = countries.filter(({ name }) =>
             name.official.toLowerCase().includes(valueNormalized)
+            
           );
+          console.log(findCountry);
   
           if (findCountry.length > 10) {
             refs.list.innerHTML = '';
